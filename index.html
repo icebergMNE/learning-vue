@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <input type="text" id="input" v-model="message">
+        <p>The value of message is {{ message }}</p>
+
+        <!-- moze se raditi sa duplim zagradama -->
+        <ul>
+            <li v-for="name in names">{{ name }}</li>
+        </ul>
+        <!-- ili sa v-text koja to isto radi -->
+        <ul>
+            <li v-for="name in names" v-text="name"></li>
+        </ul>
+
+        <!-- ovako mozemo da dodamo nesto u array -->
+        <input type="text" v-model="newName">
+        <button @click="addName">Dodaj ime</button>
+    </div>
+
+    <script src="https://unpkg.com/vue"></script>
+
+    <script>
+
+        var app = new Vue({
+            el: '#root',
+            data:{
+                newName:'',
+                message: 'Hello Vue',
+                names:['Joe', 'Mary', 'Doe', 'Nadza']
+            },
+            methods:{
+                addName(){
+                    console.log('adding name');
+                    this.names.push(this.newName);
+                    this.newName = '';
+                }
+            }
+
+        });
+
+    </script>
+</body>
+</html>

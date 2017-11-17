@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="root">
+        <h1 v-text="new Date()"></h1>
+
+        <h1>
+            {{ reversedMessage }}
+        </h1>
+
+        <h2>All tasks</h2>
+        <ul>
+            <li v-for="task in tasks">
+                <input type="checkbox" v-model="task.completed">
+                <span>{{ task.description }}</span>
+            </li>
+        </ul>
+
+        <h2>Completed tasks</h2>
+        <ul>
+            <li v-for="task in completedTasks" v-text="task.description">
+                
+            </li>
+        </ul>
+
+    </div>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+
+        var app = new Vue({
+            el:'#root',
+            data:{
+                message: 'hello nadza',
+                tasks: [
+                    { description:'Go to the store', completed:false},
+                    { description:'Go to the store 1', completed:true},
+                    { description:'Go to the store 2', completed:false},
+                    { description:'Go to the store 3', completed:false},
+                    { description:'Go to the store 4', completed:false}
+                ]
+            },
+            computed:{
+                reversedMessage(){
+                    return this.message.split('').reverse().join('');
+                },
+                completedTasks(){
+                    return this.tasks.filter(task => task.completed);
+                }
+            },
+            methods:{
+                checkTask(){
+                    this.tasks.completed = true;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
